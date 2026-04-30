@@ -1,11 +1,18 @@
 load("@aspect_rules_js//contrib/nextjs:defs.bzl", "nextjs_standalone_build", "nextjs_standalone_server")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//nextjs:next/package_json.bzl", next_bin = "bin")
 
 npm_link_all_packages()
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//visibility:public"],
+)
 
 # The nextjs binary target to used by nextjs:defs.bzl
 next_bin.next_binary(
@@ -53,11 +60,17 @@ js_library(
 nextjs_standalone_build(
     name = "standalone",
     srcs = [
-        "jsconfig.json",
         ":lib",
         ":nextjs-css",
+        ":tsconfig",
+        "//nextjs/src/components",
     ],
     config = "next.standalone.mjs",
+    data = [
+        ":node_modules/@types/node",
+        ":node_modules/@types/react",
+        ":node_modules/typescript",
+    ],
     next_js_binary = ":next_js_binary",
     silent_on_success = False,
 )

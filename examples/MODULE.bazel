@@ -6,12 +6,18 @@ local_path_override(
     path = "..",
 )
 
+bazel_dep(name = "aspect_rules_ts", version = "3.8.8")
+
 bazel_dep(name = "bazel_lib", version = "3.0.0", dev_dependency = True)
 bazel_dep(name = "bazel_skylib", version = "1.5.0", dev_dependency = True)
 bazel_dep(name = "jq.bzl", version = "0.4.0", dev_dependency = True)
 bazel_dep(name = "platforms", version = "1.0.0", dev_dependency = True)
 bazel_dep(name = "rules_nodejs", version = "6.7.3", dev_dependency = True)
 bazel_dep(name = "rules_shell", version = "0.6.1", dev_dependency = True)
+
+ts = use_extension("@aspect_rules_ts//ts:extensions.bzl", "ext")
+ts.deps(ts_version = "5.9.3")
+use_repo(ts, "npm_typescript")
 
 node = use_extension(
     "@rules_nodejs//nodejs:extensions.bzl",

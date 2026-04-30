@@ -1,0 +1,15 @@
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+
+ts_project(
+    name = "components",
+    srcs = ["div.tsx"],
+    allow_js = True,
+    declaration = True,
+    incremental = True,
+    no_emit = False,
+    preserve_jsx = True,
+    resolve_json_module = True,
+    transpiler = "tsc",
+    tsconfig = "//nextjs:tsconfig",
+    visibility = ["//nextjs:__subpackages__"],
+)
