@@ -298,16 +298,15 @@ Valid pnpm workspace projects: {}
                     maybe_dev = (", " if is_alias else "") + "dev=True" if is_dev else "",
                 ))
 
-                if "//visibility:public" in _import.package_visibility:
-                    link_target = '":node_modules/{alias}"'.format(alias = link_alias)
+                link_target = '":node_modules/{alias}"'.format(alias = link_alias)
 
-                    links_targets[link_package]["dev" if is_dev else "prod"].append(link_target)
+                links_targets[link_package]["dev" if is_dev else "prod"].append(link_target)
 
-                    if link_alias[0] == "@":
-                        package_scope = link_alias[:link_alias.find("/", 1)]
-                        if package_scope not in links_scope_targets[link_package]:
-                            links_scope_targets[link_package][package_scope] = []
-                        links_scope_targets[link_package][package_scope].append(link_target)
+                if link_alias[0] == "@":
+                    package_scope = link_alias[:link_alias.find("/", 1)]
+                    if package_scope not in links_scope_targets[link_package]:
+                        links_scope_targets[link_package][package_scope] = []
+                    links_scope_targets[link_package][package_scope].append(link_target)
 
                 # the resolved.json for this alias of the package
                 resolved_json_rel_path = "{}/{}".format(link_alias, _RESOLVED_JSON_FILENAME)
@@ -488,7 +487,7 @@ Valid pnpm workspace projects: {}
             name = "node_modules",
             srcs = link_targets if link_targets else [],
             tags = ["manual"],
-            visibility = ["//visibility:public"],
+            visibility = [":__subpackages__"],
         )""")
 
     npm_link_targets_const, npm_link_targets_bzl = _generate_npm_link_targets(links_targets)

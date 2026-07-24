@@ -1024,6 +1024,7 @@ def _link_pkg_1():
         ":node_modules/semver-first-satisfied",
         ":node_modules/syncpack",
         ":node_modules/typescript",
+        ":node_modules/unused",
         ":node_modules/webpack-bundle-analyzer",
         ":node_modules/test-npm_package",
     ], {
@@ -2291,7 +2292,7 @@ def npm_link_all_packages(name = "node_modules", imported_links = [], prod = Tru
             name = "node_modules",
             srcs = link_targets if link_targets else [],
             tags = ["manual"],
-            visibility = ["//visibility:public"],
+            visibility = [":__subpackages__"],
         )
 
 _LINK_TARGETS = {
@@ -2336,6 +2337,7 @@ _LINK_TARGETS = {
             ":node_modules/semver-first-satisfied",
             ":node_modules/syncpack",
             ":node_modules/typescript",
+            ":node_modules/unused",
             ":node_modules/webpack-bundle-analyzer",
             ":node_modules/test-npm_package",
         ],
