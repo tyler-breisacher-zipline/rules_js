@@ -487,7 +487,6 @@ Valid pnpm workspace projects: {}
             name = "node_modules",
             srcs = link_targets if link_targets else [],
             tags = ["manual"],
-            visibility = [":__subpackages__"],
         )""")
 
     npm_link_targets_const, npm_link_targets_bzl = _generate_npm_link_targets(links_targets)
