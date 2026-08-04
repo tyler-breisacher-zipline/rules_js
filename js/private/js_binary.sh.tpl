@@ -162,6 +162,12 @@ elif [[ "$PWD" == *"/bazel-~1/"* ]]; then
     bazel_out_segment="/bazel-~1/"
 fi
 
+echo '=====' >&2
+echo PWD: $PWD >&2
+echo BAZEL_BINDIR: $BAZEL_BINDIR >&2
+echo bazel_out_segment: ${bazel_out_segment:-unset} >&2
+echo '=====' >&2
+
 # When $PWD is a build action execroot the bindir hangs off it (BAZEL_BINDIR resolves from $PWD), so
 # $PWD is the execroot even if its path contains a "bazel-out" segment (e.g. a matching output base).
 # Otherwise scan the output tree for the execroot (runfiles, or a nested js_binary in the bindir).
