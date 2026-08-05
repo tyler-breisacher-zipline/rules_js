@@ -173,6 +173,12 @@ elif [[ "$PWD" == *"/bazel-~1/"* ]]; then
     bazel_out_segment="/bazel-~1/"
 fi
 
+echo '=====' >&2
+echo PWD: $PWD >&2
+echo BAZEL_BINDIR: $BAZEL_BINDIR >&2
+echo bazel_out_segment: ${bazel_out_segment:-unset} >&2
+echo '=====' >&2
+
 if [[ "${bazel_out_segment:-}" ]]; then
     if [ "${JS_BINARY__USE_EXECROOT_ENTRY_POINT:-}" ] && [ "${JS_BINARY__EXECROOT:-}" ]; then
         logf_debug "inheriting JS_BINARY__EXECROOT %s from parent js_binary process as JS_BINARY__USE_EXECROOT_ENTRY_POINT is set" "$JS_BINARY__EXECROOT"
