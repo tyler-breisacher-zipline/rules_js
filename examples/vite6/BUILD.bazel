@@ -22,8 +22,7 @@ vite_bin.vite(
     srcs = [
         "index.html",
         "src/index.jsx",
-        ":node_modules/react",
-        ":node_modules/react-dom",
+        ":node_modules",
     ],
     chdir = package_name(),
     data = [":vite-config"],

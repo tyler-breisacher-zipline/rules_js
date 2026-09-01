@@ -90,6 +90,7 @@ npm.npm_translate_lock(
             "//npm_package:__subpackages__",
         ],
         "@mycorp/pkg-e": ["//npm_deps:__subpackages__"],
+        "react@19.2.4": ["//vite6:__pkg__"],
     },
     pnpm_lock = "//:pnpm-lock.yaml",
     public_hoist_packages = {
