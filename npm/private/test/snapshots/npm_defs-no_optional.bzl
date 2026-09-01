@@ -2037,7 +2037,6 @@ def npm_link_all_packages(name = "node_modules", imported_links = [], prod = Tru
             name = "node_modules",
             srcs = link_targets if link_targets else [],
             tags = ["manual"],
-            visibility = ["//visibility:public"],
         )
 
 _LINK_TARGETS = {
